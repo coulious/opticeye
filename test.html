@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opticeye - 智能瞳孔监测系统</title>
+    <!-- 添加favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .tech-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100">
+    <!-- 导航栏 -->
+    <nav class="sticky top-0 bg-slate-800/95 backdrop-blur z-50 border-b border-slate-700">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- 替换为自定义logo - 需要准备一个eye.svg或eye.png文件 -->
+                <svg class="w-8 h-8 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4a8 8 0 018 8 15 15 0 01-8 8 15 15 0 01-8-8 8 8 0 018-8z"/>
+                </svg>
+                <span class="font-semibold text-blue-300">Opticeye</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#hardware" class="hover:text-cyan-300 transition-colors">硬件平台</a>
+                <a href="#architecture" class="hover:text-cyan-300 transition-colors">系统架构</a>
+                <a href="#cases" class="hover:text-cyan-300 transition-colors">应用场景</a>
+                <a href="#deployment" class="hover:text-cyan-300 transition-colors">部署简述</a>
+                <a href="#team" class="hover:text-cyan-300 transition-colors">优化方向</a>
+                <a href="#team" class="hover:text-cyan-300 transition-colors">研发团队</a>
+            </div>
+        </div>
+    </nav>
+
+<!-- 项目概述 -->
+<section class="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
+    <div class="container mx-auto px-4">
+        <h1 class="text-5xl md:text-6xl font-bold gradient-text mb-8">瞳孔动态量化测量仪</h1>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-start">
+            <div class="space-y-6">
+                <div class="p-6 tech-card rounded-xl border border-slate-700">
+                    <h2 class="text-2xl font-semibold text-blue-400 mb-4">医疗级检测精度</h2>
+                    <ul class="space-y-3 text-slate-300">
+                        <li>· 动态阈值过滤 ±10% 波动范围</li>
+                        <li>· 最小误差 ≤2px (置信度95%)</li>
+                        <li>· 5帧滑动平均算法稳定输出</li>
+                    </ul>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl border border-slate-700">
+                    <h2 class="text-2xl font-semibold text-cyan-400 mb-4">多模态数据管理</h2>
+                    <ul class="space-y-3 text-slate-300">
+                        <li>· 自动生成 YYYYMMDD_HHMMSS_XXX.json</li>
+                        <li>· 时间轴历史记录回溯功能</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="relative group">
+                <div class="absolute inset-0 bg-blue-500/10 rounded-2xl transform -rotate-2 scale-105 group-hover:rotate-0 transition-all"></div>
+                <div class="relative aspect-video bg-slate-800 rounded-2xl overflow-hidden border border-slate-600">
+                    <!-- 视频演示区域 -->
+                    <video autoplay loop muted playsinline class="w-full h-full">
+                        <source src="test.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <section id="hardware" class="py-20 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold gradient-text mb-12">硬件平台</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- 主控平台 -->
+                <div class="p-6 tech-card rounded-xl border border-blue-400/20 hover:border-blue-400/40">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-4">泰山派开发板</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li>· 主控：RK3566 四核Cortex-A55</li>
+                        <li>· GPU：Mali-G52</li>
+                        <li>· NPU：0.8TOPs AI加速</li>
+                        <li>· 内存：LPDDR4 2GB/4GB</li>
+                        <li>· 存储：eMMC 5.1</li>
+                        <li>· 系统：Android 11</li>
+                    </ul>
+                </div>
+                
+                <!-- 图像传感器 -->
+                <div class="p-6 tech-card rounded-xl border border-cyan-400/20 hover:border-cyan-400/40">
+                    <h3 class="text-xl font-semibold text-cyan-400 mb-4">IMX355传感器</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li>· 像素：800万有效像素</li>
+                        <li>· 单位像素：1.12μm</li>
+                        <li>· 光圈：f/2.2</li>
+                        <li>· 输出：RAW格式</li>
+                        <li>· 帧率：30fps@1080p</li>
+                        <li>· 感光性能：优化夜间成像</li>
+                    </ul>
+                </div>
+                
+                <!-- 显示模组 -->
+                <div class="p-6 tech-card rounded-xl border border-purple-400/20 hover:border-purple-400/40">
+                    <h3 class="text-xl font-semibold text-purple-400 mb-4">LG Wing屏幕</h3>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li>· 类型：OLED柔性屏</li>
+                        <li>· 分辨率：FHD+</li>
+                        <li>· 刷新率：60Hz</li>
+                        <li>· 色深：10bit</li>
+                        <li>· 亮度：1200nit峰值</li>
+                        <li>· 接口：MIPI DSI</li>
+                    </ul>
+                </div>
+            </div>
+    
+            <!-- 性能指标 -->
+            <div class="mt-12 grid md:grid-cols-4 gap-6">
+                <div class="p-6 tech-card rounded-xl text-center">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">1.8GHz</div>
+                    <div class="text-slate-300">CPU主频</div>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl text-center">
+                    <div class="text-3xl font-bold text-cyan-400 mb-2">0.8TOPs</div>
+                    <div class="text-slate-300">AI算力</div>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl text-center">
+                    <div class="text-3xl font-bold text-purple-400 mb-2">30FPS</div>
+                    <div class="text-slate-300">实时检测</div>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl text-center">
+                    <div class="text-3xl font-bold text-green-400 mb-2">2GB</div>
+                    <div class="text-slate-300">运行内存</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="architecture" class="py-20 bg-slate-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold gradient-text mb-12">系统架构</h2>
+            
+            <!-- 系统层级 -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="p-6 tech-card rounded-xl">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-4">数据采集层</h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li>· USB摄像头实时采集</li>
+                        <li>· 1080p高清图像流</li>
+                        <li>· 30fps连续采样</li>
+                    </ul>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl">
+                    <h3 class="text-xl font-semibold text-cyan-400 mb-4">算法处理层</h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li>· OpenCV图像处理</li>
+                        <li>· 霍夫圆变换检测</li>
+                        <li>· 滑动窗口平滑</li>
+                    </ul>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl">
+                    <h3 class="text-xl font-semibold text-purple-400 mb-4">数据存储层</h3>
+                    <ul class="space-y-2 text-slate-300">
+                        <li>· JSON格式存储</li>
+                        <li>· 时序数据记录</li>
+                        <li>· 历史数据回溯</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 检测流程 -->
+            <h3 class="text-2xl font-semibold text-blue-400 mb-8">核心检测流程</h3>
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6">
+                <div class="p-6 tech-card rounded-xl hover:translate-y-2 hover:shadow-xl">
+                    <div class="text-blue-400 text-xl font-mono mb-3">01</div>
+                    <h3 class="text-lg font-semibold mb-2">图像预处理</h3>
+                    <p class="text-slate-400 text-sm">cvtColor灰度转换 + Otsu二值化</p>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl hover:translate-y-2 hover:shadow-xl">
+                    <div class="text-cyan-400 text-xl font-mono mb-3">02</div>
+                    <h3 class="text-lg font-semibold mb-2">霍夫圆检测</h3>
+                    <p class="text-slate-400 text-sm">HoughCircles算法检测瞳孔轮廓</p>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl hover:translate-y-2 hover:shadow-xl">
+                    <div class="text-purple-400 text-xl font-mono mb-3">03</div>
+                    <h3 class="text-lg font-semibold mb-2">动态阈值过滤</h3>
+                    <p class="text-slate-400 text-sm">±10%波动范围过滤异常数据</p>
+                </div>
+                
+                <div class="p-6 tech-card rounded-xl hover:translate-y-2 hover:shadow-xl">
+                    <div class="text-green-400 text-xl font-mono mb-3">04</div>
+                    <h3 class="text-lg font-semibold mb-2">滑动平均处理</h3>
+                    <p class="text-slate-400 text-sm">5帧滑动窗口平滑数据输出</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- 应用场景 -->
+<section id="cases" class="py-20 bg-slate-900">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold gradient-text mb-12">临床应用场景</h2>
+        
+        <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- 原有麻醉监测 -->
+            <div class="p-6 tech-card rounded-xl border border-slate-700 hover:border-blue-400">
+                <div class="h-40 bg-slate-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">麻醉深度监测</h3>
+                <p class="text-slate-400 text-sm">通过瞳孔收缩速率分析中枢抑制程度[<sup data-citation='{&quot;id&quot;:1,&quot;url&quot;:&quot;https://sspai.com/post/95184&quot;,&quot;title&quot;:&quot;对「刻意智能」说不，这些应用让我看到 AI 的更多潜力 - 少数派&quot;,&quot;content&quot;:&quot;对「刻意智能」说不，这些应用让我看到 AI 的更多潜力 0115 15:00 大语言模型发展渐渐成熟，除了 GPT、Claude 等闭源模型，在《本地大模型之路（一）：大模型的是什么、为什么以及怎么选》一文中，作者还介绍了当前成熟的开源大模型等内容。它们大多数都有对应的 App 基于这些模型为用户提供服务，像是通义、Perplexity、ChatGPT 等。 很多应用也被加上大语言模型的能力，其中&quot;}'>1</sup>](https://sspai.com/post/95184)</p>
+            </div>
+
+            <!-- 新增痴呆预防 -->
+            <div class="p-6 tech-card rounded-xl border border-slate-700 hover:border-purple-400">
+                <div class="h-40 bg-slate-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">痴呆早期预警</h3>
+                <p class="text-slate-400 text-sm">持续监测瞳孔调节延迟（>300ms为异常阈值）[<sup data-citation='{&quot;id&quot;:2,&quot;url&quot;:&quot;https://www.uisdc.com/ai-application-scenario-2&quot;,&quot;title&quot;:&quot;万字总结！5大AI应用场景+17个细分方向+40多个案例精选&quot;,&quot;content&quot;:&quot;本篇旨在探讨现阶段 AI 应用的方向、实际体验及其对应价值，为想要做 AI 应用的小伙伴提供方向价值判断参考。这里筛选了我个人目前看到的比较亮眼且有实际应用场景的案例，对实际体验感受做了总结，也推荐大家自己上手感受。 更多AI使用场景归纳： 写在前面 一共筛选出 5 大应用场景，17 个细分方向，40+大模型案例。整体的总结放在前面： 1 从使用场景来看，分为：优化大模型产品的使用体验（使其面对细&quot;}'>2</sup>](https://www.uisdc.com/ai-application-scenario-2)</p>
+            </div>
+
+            <!-- 新增吸毒检测 -->
+            <div class="p-6 tech-card rounded-xl border border-slate-700 hover:border-red-400">
+                <div class="h-40 bg-slate-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">药物滥用筛查</h3>
+                <p class="text-slate-400 text-sm">瞳孔直径异常波动检测（吗啡类>8mm，冰毒类<3mm）[<sup data-citation='{&quot;id&quot;:2,&quot;url&quot;:&quot;https://www.uisdc.com/ai-application-scenario-2&quot;,&quot;title&quot;:&quot;万字总结！5大AI应用场景+17个细分方向+40多个案例精选&quot;,&quot;content&quot;:&quot;本篇旨在探讨现阶段 AI 应用的方向、实际体验及其对应价值，为想要做 AI 应用的小伙伴提供方向价值判断参考。这里筛选了我个人目前看到的比较亮眼且有实际应用场景的案例，对实际体验感受做了总结，也推荐大家自己上手感受。 更多AI使用场景归纳： 写在前面 一共筛选出 5 大应用场景，17 个细分方向，40+大模型案例。整体的总结放在前面： 1 从使用场景来看，分为：优化大模型产品的使用体验（使其面对细&quot;}'>2</sup>](https://www.uisdc.com/ai-application-scenario-2)</p>
+            </div>
+
+            <!-- 新增精神疾病评估 -->
+            <div class="p-6 tech-card rounded-xl border border-slate-700 hover:border-green-400">
+                <div class="h-40 bg-slate-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2">精神障碍评估</h3>
+                <p class="text-slate-400 text-sm">瞳孔对光反射离散度分析（精神分裂症差异>0.5mm）[<sup data-citation='{&quot;id&quot;:2,&quot;url&quot;:&quot;https://www.uisdc.com/ai-application-scenario-2&quot;,&quot;title&quot;:&quot;万字总结！5大AI应用场景+17个细分方向+40多个案例精选&quot;,&quot;content&quot;:&quot;本篇旨在探讨现阶段 AI 应用的方向、实际体验及其对应价值，为想要做 AI 应用的小伙伴提供方向价值判断参考。这里筛选了我个人目前看到的比较亮眼且有实际应用场景的案例，对实际体验感受做了总结，也推荐大家自己上手感受。 更多AI使用场景归纳： 写在前面 一共筛选出 5 大应用场景，17 个细分方向，40+大模型案例。整体的总结放在前面： 1 从使用场景来看，分为：优化大模型产品的使用体验（使其面对细&quot;}'>2</sup>](https://www.uisdc.com/ai-application-scenario-2)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="deployment" class="py-20 bg-slate-800">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold gradient-text mb-12">部署简述</h2>
+        
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+            <!-- 环境准备 -->
+            <div class="p-6 tech-card rounded-xl hover:translate-y-2 hover:shadow-xl">
+                <div class="text-blue-400 text-xl font-mono mb-3">01</div>
+                <h3 class="text-lg font-semibold mb-2">环境依赖</h3>
+                <div class="text-slate-400 text-sm space-y-2">
+                    <p>· OpenCV (cv2)</p>
+                    <p>· NumPy</p>
+                    <p>· Matplotlib</p>
+                    <p>· Threading</p>
+                </div>
+            </div>
+            
+            <!-- 硬件要求 -->
+            <div class="p-6 tech-card rounded-xl hover:translate-y-2 hover:shadow-xl">
+                <div class="text-cyan-400 text-xl font-mono mb-3">02</div>
+                <h3 class="text-lg font-semibold mb-2">硬件要求</h3>
+                <div class="text-slate-400 text-sm space-y-2">
+                    <p>· USB摄像头</p>
+                    <p>· 分辨率: 1080p</p>
+                    <p>· 帧率: 30fps以上</p>
+                    <p>· 自动对焦功能</p>
+                </div>
+            </div>
+            
+            <!-- 运行说明 -->
+            <div class="p-6 tech-card rounded-xl hover:translate-y-2 hover:shadow-xl">
+                <div class="text-purple-400 text-xl font-mono mb-3">03</div>
+                <h3 class="text-lg font-semibold mb-2">运行说明</h3>
+                <div class="text-slate-400 text-sm space-y-2">
+                    <p>1. 连接USB摄像头</p>
+                    <p>2. 运行circle_detection.py</p>
+                    <p>3. 点击开始检测按钮</p>
+                    <p>4. 结果自动保存为JSON</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="optimization" class="py-20 bg-slate-900">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold gradient-text mb-12">优化方向</h2>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- 红外测距模块 -->
+            <div class="p-6 tech-card rounded-xl border border-blue-400/20 hover:border-blue-400/40">
+                <h3 class="text-xl font-semibold text-blue-400 mb-4">红外测距系统</h3>
+                <ul class="space-y-2 text-slate-300 text-sm">
+                    <li>· 基于三角测量原理</li>
+                    <li>· 实时测量摄像头到瞳孔距离</li>
+                    <li>· 无需反光板，响应迅速</li>
+                    <li>· 设计紧凑，易于集成</li>
+                </ul>
+            </div>
+            
+            <!-- 物理尺寸转换 -->
+            <div class="p-6 tech-card rounded-xl border border-cyan-400/20 hover:border-cyan-400/40">
+                <h3 class="text-xl font-semibold text-cyan-400 mb-4">物理尺寸映射</h3>
+                <ul class="space-y-2 text-slate-300 text-sm">
+                    <li>· 像素到物理尺寸转换</li>
+                    <li>· 实时距离补偿算法</li>
+                    <li>· 动态校准系统</li>
+                    <li>· 毫米级测量精度</li>
+                </ul>
+            </div>
+            
+            <!-- 数据分析系统 -->
+            <div class="p-6 tech-card rounded-xl border border-purple-400/20 hover:border-purple-400/40">
+                <h3 class="text-xl font-semibold text-purple-400 mb-4">智能分析系统</h3>
+                <ul class="space-y-2 text-slate-300 text-sm">
+                    <li>· 多点标定曲线</li>
+                    <li>· 温度补偿机制</li>
+                    <li>· 环境光干扰消除</li>
+                    <li>· 数据可视化展示</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 技术指标 -->
+        <div class="mt-12 grid md:grid-cols-4 gap-6">
+            <div class="p-6 tech-card rounded-xl text-center">
+                <div class="text-3xl font-bold text-blue-400 mb-2">±0.1mm</div>
+                <div class="text-slate-300">测量精度</div>
+            </div>
+            
+            <div class="p-6 tech-card rounded-xl text-center">
+                <div class="text-3xl font-bold text-cyan-400 mb-2">50ms</div>
+                <div class="text-slate-300">响应时间</div>
+            </div>
+            
+            <div class="p-6 tech-card rounded-xl text-center">
+                <div class="text-3xl font-bold text-purple-400 mb-2">20cm</div>
+                <div class="text-slate-300">测量范围</div>
+            </div>
+            
+            <div class="p-6 tech-card rounded-xl text-center">
+                <div class="text-3xl font-bold text-green-400 mb-2">95%</div>
+                <div class="text-slate-300">可靠性</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="team" class="py-20 bg-slate-800">
+    <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold gradient-text mb-12">研发团队</h2>
+        
+        <div class="grid md:grid-cols-1 gap-8">
+            <div class="p-8 tech-card rounded-xl border border-slate-700">
+                <h3 class="text-2xl font-semibold text-blue-400 mb-6">项目信息</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="text-lg font-medium text-cyan-400 mb-2">项目组</h4>
+                        <p class="text-slate-300">上海第二工业大学大学生技师协会25年大创项目组</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-medium text-cyan-400 mb-2">团队成果</h4>
+                        <p class="text-slate-300">2025年上海市市级大学生创新项目</p>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-medium text-cyan-400 mb-2">联系方式</h4>
+                        <ul class="text-slate-300 space-y-1">
+                            <li>邮箱：20221113029@stu.sspu.edu.cn</li>
+                            <li>微信：zhouxin2745683341</li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-medium text-cyan-400 mb-2">项目仓库</h4>
+                        <a href="https://gitee.com/zx051220/opticeye" 
+                           class="text-slate-300 hover:text-cyan-400 transition-colors"
+                           target="_blank">
+                            Gitee仓库
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
